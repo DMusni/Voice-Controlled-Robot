@@ -40,66 +40,7 @@ void setup() {
 }
 
 void loop() {
-  // Obstacle();
-  // Bluetoothcontrol();
   voicecontrol();
-}
-
-// Code for controlling the arduino via bluetooth controls 
-void Bluetoothcontrol() {
-  // if data was sent, read it into value variable
-  if (Serial.available() > 0) {
-    value = Serial.read();
-    Serial.println(value);  // print command for debugging
-  }
-  // move forward
-  if (value == 'F') {
-    moveForward();
-  // move backward
-  } else if (value == 'B') {
-    moveBack();
-  // move left
-  } else if (value == 'L') {
-    turnLeft();
-  // move right
-  } else if (value == 'R') {
-    turnRight();
-  // stop
-  } else if (value == 'X') {
-    Stop();
-  }
-}
-// TODO update the code here
-void Obstacle() {
-  distance = measureDistance();
-  if (distance <= 12) {
-    Stop();
-    moveBack();
-    delay(100);
-    Stop();
-
-    distanceLeft = lookLeft();
-    servo.write(spoint);
-    delay(800);
-
-    distanceRight = lookRight();
-    servo.write(spoint);
-
-    if (distanceLeft < distanceRight) {
-      turnRight();
-      delay(500);
-      Stop();
-      delay(200);
-    } else if (distanceLeft > distanceRight) {
-      turnLeft();
-      delay(500);
-      Stop();
-      delay(200);
-    }
-
-  } else {
-    moveForward();
-  }
 }
 
 void voicecontrol() {
